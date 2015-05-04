@@ -1,0 +1,47 @@
+
+public class Deck 
+{
+	private Card[] deck;
+	private int numOfCards;
+	
+	public Deck()
+	{
+		deck = new Card[52];
+		
+		numOfCards = 0;
+        String [] suits = {"Spades","Diamonds","Clubs","Hearts"};
+        
+        for (int suit = 0; suit < 4; suit++)
+        {
+            for (int value = 1; value <= 13; value++)
+            {
+            	deck[numOfCards] = new Card(value,suits[suit]);
+                numOfCards++;
+            }
+        }
+	}
+	
+	public Card[] shuffleDeck()
+	{
+		for (int i = 0; i < deck.length; i++)
+		{
+			int index = (int)(Math.random() * deck.length);
+			Card temp = deck[i];
+			deck[i] = deck[index];
+			deck[index] = temp;
+		}
+		return deck;
+	}
+	
+	public String toString()
+	{
+		String deckString = "New deck created\n";
+		
+        for (int cards = 0; cards < 52; cards++)
+        {
+            deckString = deckString + deck[cards] + "\n";
+        }
+        
+        return deckString;
+	}
+}
