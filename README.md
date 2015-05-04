@@ -10,10 +10,10 @@ public Card()
 - creates an object Card with parameters value and suits
 - Value ranges from numbers 1-13.
 
-If value is 1, value is now Ace.
-If value is 11, value is now Jack.
-If value is 12, value is now Queen.
-If value is 13, value is now King.
+If value is 1, value is now Ace. 
+If value is 11, value is now Jack. 
+If value is 12, value is now Queen. 
+If value is 13, value is now King. 
 Any number not 1 or 11-13 does not change its value.
 
 getSuit()
@@ -26,7 +26,7 @@ toString()
 - combines suit and value
 ex) value + "of" + suit ---> Ace of Diamonds
 
-//**DECK CLASS*\\
+//**DECK CLASS**\\
 Instance variables:
 - Card[] deck <----- an array with Card objects
 - int numOfCards <----- keeps track of cards
@@ -36,8 +36,7 @@ public Deck()
 - String [] suits <----- initializes a string array with "Spades", "Diamonds",
   "Clubs", "Hearts"
 
-Inner for loop creates thirteen cards with a value and a suit and adds it
-to the card array.
+Inner for loop creates thirteen cards with a value and a suit and adds it to the card array.
 Outer for loop repeats inner loop four times for each suit.
 
 shuffleDeck()
