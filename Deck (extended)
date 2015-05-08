@@ -3,6 +3,7 @@
 public class Deck {
 	private Card[] deck;
 	private int numOfCards;
+	private String handType = "No pair";
 	
 	public Deck()
 	{
@@ -65,4 +66,56 @@ public class Deck {
 	{
 		//in progress
 	}
+	
+	public int payWinings()
+	{
+		int winnings = 0;
+		if (handType.equals("One pair"))
+		{
+			winnings = 1;
+		}
+		
+		else if (handType.equals("Two pairs"))
+		{
+			winnings = 2;
+		}
+		
+		else if (handType.equals("Three of a kind"))
+		{
+			winnings = 3;
+		}
+		
+		else if (handType.equals("Straight"))
+		{
+			winnings = 4;
+		}
+		
+		else if (handType.equals("Flush"))
+		{
+			winnings = 5;
+		}
+		
+		else if (handType.equals("Full House"))
+		{
+			winnings = 6;
+		}
+		
+		else if (handType.equals("Four of a kind"))
+		{
+			winnings = 25;
+		}
+		
+		else if (handType.equals("Straight Flush"))
+		{
+			winnings = 50;
+		}
+		
+		else if (handType.equals("Royal Flush"))
+		{
+			winnings = 250;
+		}
+		
+		return winnings;
+	}
+
 }
