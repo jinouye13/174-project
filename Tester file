@@ -1,1 +1,12 @@
 //Deck Tester
+
+public class DeckTester 
+{
+	public static void main(String[]args)
+	{
+		Deck deck = new Deck();
+		
+		deck.shuffleDeck();
+		System.out.println(deck.toString());
+	}
+}
