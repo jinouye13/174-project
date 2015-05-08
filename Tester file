@@ -7,6 +7,6 @@ public class DeckTester
 		Deck deck = new Deck();
 		
 		deck.shuffleDeck();
-		System.out.println(deck.toString());
+		deck.getHand();
 	}
 }
