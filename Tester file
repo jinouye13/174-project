@@ -8,5 +8,6 @@ public class DeckTester
 		
 		deck.shuffleDeck();
 		deck.getHand();
+		System.out.println("You won " + deck.payWinnings() + " tokens.";
 	}
 }
