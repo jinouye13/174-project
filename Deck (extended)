@@ -1,25 +1,28 @@
-//Veronica's part
 
 public class Deck {
 	private Card[] deck;
-	private int numOfCards = 0;
+	private int numOfCards;
+	private int currentCard = 0;
 	private Hand playerHand = new Hand();
+	private boolean flush;
+	private boolean straight;
+	private int[] valueNum = new int[5];
 	
 	public Deck()
 	{
 		deck = new Card[52];
 		
 		numOfCards = 0;
-        	String [] suits = {"Spades","Diamonds","Clubs","Hearts"};
+        String [] suits = {"Spades","Diamonds","Clubs","Hearts"};
         
-        	for (int suit = 0; suit < 4; suit++)
-        	{
-            		for (int value = 1; value <= 13; value++)
-            		{
-            			deck[numOfCards] = new Card(value,suits[suit]);
-                		numOfCards++;
-            		}
-		}
+        for (int suit = 0; suit < 4; suit++)
+        {
+            for (int value = 2; value <= 14; value++)
+            {
+            	deck[numOfCards] = new Card(value,suits[suit]);
+                numOfCards++;
+            }
+        }
 	}
 	
 	public Card[] shuffleDeck()
@@ -38,22 +41,41 @@ public class Deck {
 	{
 		String deckString = "New deck created\n";
 		
-        	for (int cards = 0; cards < 52; cards++)
-        	{
-            		deckString = deckString + deck[cards] + "\n";
-        	}
+        for (int cards = 0; cards < 52; cards++)
+        {
+            deckString = deckString + deck[cards] + "\n";
+        }
         
-        	return deckString;
+        return deckString;
 	}
-	
-	//Jamie's contributions
 	
 	public void dealHand() {
 		
+		System.out.println("Here is your hand:");
 		for (int i = 0; i < 5; i++)
 		{
 			playerHand.setHand(i, deck[currentCard++]);
 		}
 	}
-
+	
+	public void getIntHand()
+	{
+		playerHand.convertToInt(valueNum, flush, straight);
+	}
+	
+	public void flushHand()
+	{
+		flush = playerHand.checkFlush(flush);
+	}
+	
+	public void straightHand()
+	{
+		straight = playerHand.checkStraight(valueNum, straight);
+	}
+	
+	public void stuffHand()
+	{
+		System.out.println(playerHand.rankHand(valueNum, flush, straight));
+	}
+	
 }
