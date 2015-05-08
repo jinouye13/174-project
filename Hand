@@ -1,4 +1,6 @@
 
+import java.util.Arrays;
+
 public class Hand {
 
 	private Card[] hand = new Card[5];
@@ -7,11 +9,128 @@ public class Hand {
 	public void setHand(int number, Card dealtCard)
 	{
 		hand[number] = dealtCard;
+		System.out.println(hand[number]);
 	}
 	
-	public String rankHand()
+	public boolean checkFlush(boolean flush)
 	{
-	  //work in progress
+		for (int i = 0; i < 4; i++)
+		{
+			if (!(hand[i+1].getSuit().equals(hand[i].getSuit())))
+			{
+				return flush = false;
+			}
+		}
+		
+		return flush = true;
+	}
+	
+	public boolean checkStraight(int[] valueNum, boolean straight)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (!(valueNum[i+1] == valueNum[i] + 1))
+			{
+				return straight = false;
+			}
+		}
+		return straight = true;
+	}
+	
+	public int[] convertToInt(int[] valueNum, boolean flush, boolean straight)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			if (hand[i].equals("Ace"))
+			{
+				valueNum[i] = 14;
+			}
+			else if ((hand[i].getValue()).equals("2"))
+			{
+				valueNum[i] = 2;
+			}
+			else if ((hand[i].getValue()).equals("3"))
+			{
+				valueNum[i] = 3;
+			}
+			else if ((hand[i].getValue()).equals("4"))
+			{
+				valueNum[i] = 4;
+			}
+			else if ((hand[i].getValue()).equals("5"))
+			{
+				valueNum[i] = 5;
+			}
+			else if ((hand[i].getValue()).equals("6"))
+			{
+				valueNum[i] = 6;
+			}
+			else if ((hand[i].getValue()).equals("7"))
+			{
+				valueNum[i] = 7;
+			}
+			else if ((hand[i].getValue()).equals("8"))
+			{
+				valueNum[i] = 8;
+			}
+			else if ((hand[i].getValue()).equals("9"))
+			{
+				valueNum[i] = 9;
+			}
+			else if ((hand[i].getValue()).equals("10"))
+			{
+				valueNum[i] = 10;
+			}
+			else if ((hand[i].getValue()).equals("Jack"))
+			{
+				valueNum[i] = 11;
+			}
+			else if ((hand[i].getValue()).equals("Queen"))
+			{
+				valueNum[i] = 12;
+			}
+			else if ((hand[i].getValue()).equals("King"))
+			{
+				valueNum[i] = 13;
+			}
+			
+		}
+		Arrays.sort(valueNum);
+		
+		for (int i = 0; i < 5; i++)
+		{
+			System.out.println(valueNum[i]);
+		}
+		return valueNum;
+	}
+	
+	public String rankHand(int[] valueNum, boolean flush, boolean straight)
+	{
+		System.out.println("straight: " + straight);
+		System.out.println("flush: " + flush);
+		if (flush == true)
+		{
+			if (valueNum[0] == 10 && valueNum[1] == 11 && valueNum[2] == 12 && valueNum[3] == 13 && valueNum[4] == 14)
+			{
+				handType = "Royal Flush";
+			}
+			
+			else if (straight == true)
+			{
+				handType = "Straight Flush";
+			}
+			
+			else
+			{
+				handType = "Flush";
+			}
+		}
+		
+		else if (straight == true)
+		{
+			handType = "Straight";
+		}
+		
 		return handType;
 	}
 	
