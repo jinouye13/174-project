@@ -7,7 +7,10 @@ public class DeckTester
 		Deck deck = new Deck();
 		
 		deck.shuffleDeck();
-		deck.getHand();
-		System.out.println("You won " + deck.payWinnings() + " tokens.";
+		deck.dealHand();
+		deck.getIntHand();
+		deck.flushHand();
+		deck.straightHand();
+		deck.stuffHand();
 	}
 }
