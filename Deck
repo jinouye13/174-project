@@ -1,0 +1,132 @@
+//Deck class
+
+import java.util.Scanner;
+public class Deck {
+        Scanner input = new Scanner(System.in);
+	private Card[] deck;
+	private int numOfCards;
+	private String handType = "No pair";
+	private int currentCard = 0;
+	private Hand playerHand = new Hand();
+	private boolean flush;
+	private boolean straight;
+	private boolean three;
+	private boolean full;
+	private boolean four;
+	private int pair = 0;
+	private int[] valueNum = new int[5];
+	
+	public Deck()
+	{
+		deck = new Card[52];
+		
+		numOfCards = 0;
+        String [] suits = {"Spades","Diamonds","Clubs","Hearts"};
+        
+        for (int suit = 0; suit < 4; suit++)
+        {
+            for (int value = 2; value <= 14; value++)
+            {
+            	deck[numOfCards] = new Card(value,suits[suit]);
+                numOfCards++;
+            }
+        }
+	}
+	
+	public Card[] shuffleDeck()
+	{
+		for (int i = 0; i < deck.length; i++)
+		{
+			int index = (int)(Math.random() * deck.length);
+			Card temp = deck[i];
+			deck[i] = deck[index];
+			deck[index] = temp;
+		}
+		return deck;
+	}
+	
+	public String toString()
+	{
+		String deckString = "New deck created\n";
+		
+        for (int cards = 0; cards < 52; cards++)
+        {
+            deckString = deckString + deck[cards] + "\n";
+        }
+        
+        return deckString;
+	}
+	
+	public void dealHand() {
+		
+		System.out.println("Here is your hand:");
+		for (int i = 0; i < 5; i++)
+		{
+			playerHand.setHand(i, deck[currentCard++]);
+		}
+        
+		System.out.println("Enter a 9 if you wish to discard some cards");
+        int answer = input.nextInt();
+        if(answer==9){
+        	System.out.println("If you want to discard cards, how many do you want to discard");
+        	int reply2=input.nextInt();
+            System.out.println("Which ones do you want to discard?");
+            System.out.println("Cards are numbered from 0-4");
+            for(int i=0;i<reply2;i++){
+                int num = input.nextInt();
+                int index = (int)(Math.random() * deck.length);
+                if(num==0){
+                	playerHand.setHand(0, deck[index]);
+                }
+                if(num==1){
+                	playerHand.setHand(1,deck[index]);
+                }
+                if(num==2){
+                	playerHand.setHand(2,deck[index]);
+                }
+                if(num==3){
+                	playerHand.setHand(3,deck[index]);
+                }
+                if(num==4){
+                	playerHand.setHand(4,deck[index]);
+                }
+            }
+        }
+                
+	}
+	
+	public void testHand()
+	{
+		playerHand.convertToInt(valueNum);
+	
+		flush = playerHand.checkFlush(flush);
+	
+		straight = playerHand.checkStraight(valueNum, straight);
+	
+		three = playerHand.checkThree(valueNum, three);
+	
+		full = playerHand.checkFullHouse(valueNum, full);
+	
+		four = playerHand.checkFour(valueNum, three, four);
+	
+		pair = playerHand.checkPair(valueNum, pair);
+	}
+	
+	public void determineHand()
+	{
+		handType = playerHand.rankHand(handType, valueNum, flush, straight, three, full, four, pair);
+		System.out.println(handType);
+	}
+	
+	public int returnMoney(int tokens)
+	{
+		int prizeMoney = 0;
+		prizeMoney = playerHand.payWinings(handType);
+		System.out.println("You won " + prizeMoney + " token(s).");
+		tokens = tokens + prizeMoney;
+		return tokens;
+	}
+	
+}
+
+
