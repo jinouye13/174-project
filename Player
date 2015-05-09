@@ -11,6 +11,7 @@ public class Player extends Deck
 	
 	// What does the first for loop for? Is it for dealing the player a starting hand?
 	//If so, we already have a method that does that.
+	//yup I thought it was part of what I had to do
 	
 	public Card[] deal()
 	{
@@ -29,7 +30,8 @@ public class Player extends Deck
             		int reply2=input.nextInt();
       
       			//Can you explain what the for loop below is doing? Is it replacing the cards they cose to discard?
-      
+      			//the loop replaces the cards they wanted to replace based on how many cards they decided to change using reply2
+      			//as a parameter for the for loop
             		System.out.println("Which ones do you want to discard?");
             		System.out.println("Cards are numbered from 0-4");
             		for(int i=0;i<reply2;i++)
@@ -73,7 +75,8 @@ public class Player extends Deck
 	}
 	
 	//What does this below do?
-	
+	//this converts the deck to String so that it can be printed later i beleive. Veronica did this part
+	//though so im not sure
 	public String toString()
 	{
 		String deckString = "";
@@ -88,3 +91,4 @@ public class Player extends Deck
 }
 
 //Where does it accept payment?
+//I am done with that part but its not on git hub yet
