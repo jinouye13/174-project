@@ -8,9 +8,8 @@ public class DeckTester
 		
 		deck.shuffleDeck();
 		deck.dealHand();
-		deck.getIntHand();
-		deck.flushHand();
-		deck.straightHand();
-		deck.stuffHand();
+		deck.testHand();
+		deck.determineHand();
+		deck.returnMoney();
 	}
 }
