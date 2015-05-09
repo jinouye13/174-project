@@ -1,0 +1,255 @@
+//Hand class
+
+import java.util.Arrays;
+
+public class Hand {
+
+	private Card[] hand = new Card[5];
+	
+	public void setHand(int number, Card dealtCard)
+	{
+		hand[number] = dealtCard;
+		System.out.println(hand[number]);
+	}
+	
+	public boolean checkFlush(boolean flush)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (!(hand[i+1].getSuit().equals(hand[i].getSuit())))
+			{
+				return flush = false;
+			}
+		}
+		
+		return flush = true;
+	}
+	
+	public boolean checkStraight(int[] valueNum, boolean straight)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (!(valueNum[i+1] == valueNum[i] + 1))
+			{
+				return straight = false;
+			}
+		}
+		return straight = true;
+	}
+	
+	public boolean checkThree(int[] valueNum, boolean three)
+	{
+		if(valueNum[0] == valueNum[2] || valueNum[1] == valueNum[3] || valueNum[2] == valueNum[4])
+		{
+			return three = true;
+		}
+		return three = false;
+	}
+	
+	public boolean checkFullHouse(int[] valueNum, boolean full)
+	{
+		if((valueNum[0] == valueNum[2] && valueNum[3] == valueNum[4]) || (valueNum[0] == valueNum[1] && valueNum[2] == valueNum[4]))
+		{
+			return full = true;
+		}
+		return full = false;
+	}
+	
+	public boolean checkFour(int[] valueNum, boolean three, boolean four)
+	{
+		if (three && (valueNum[0] == valueNum[3] || valueNum[4] == valueNum[1]))
+		{
+			return four = true;
+		}
+		return four = false;
+	}
+	
+	public int checkPair(int[] valueNum, int pair)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				if (i != j && valueNum[i] == valueNum[j])
+				{
+					pair++;
+				}
+			}
+		}
+		pair--;
+		return pair;
+	}
+	
+	public int[] convertToInt(int[] valueNum)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			if (hand[i].equals("Ace"))
+			{
+				valueNum[i] = 14;
+			}
+			else if ((hand[i].getValue()).equals("2"))
+			{
+				valueNum[i] = 2;
+			}
+			else if ((hand[i].getValue()).equals("3"))
+			{
+				valueNum[i] = 3;
+			}
+			else if ((hand[i].getValue()).equals("4"))
+			{
+				valueNum[i] = 4;
+			}
+			else if ((hand[i].getValue()).equals("5"))
+			{
+				valueNum[i] = 5;
+			}
+			else if ((hand[i].getValue()).equals("6"))
+			{
+				valueNum[i] = 6;
+			}
+			else if ((hand[i].getValue()).equals("7"))
+			{
+				valueNum[i] = 7;
+			}
+			else if ((hand[i].getValue()).equals("8"))
+			{
+				valueNum[i] = 8;
+			}
+			else if ((hand[i].getValue()).equals("9"))
+			{
+				valueNum[i] = 9;
+			}
+			else if ((hand[i].getValue()).equals("10"))
+			{
+				valueNum[i] = 10;
+			}
+			else if ((hand[i].getValue()).equals("Jack"))
+			{
+				valueNum[i] = 11;
+			}
+			else if ((hand[i].getValue()).equals("Queen"))
+			{
+				valueNum[i] = 12;
+			}
+			else if ((hand[i].getValue()).equals("King"))
+			{
+				valueNum[i] = 13;
+			}
+			
+		}
+
+		Arrays.sort(valueNum);
+		return valueNum;
+	}
+	
+	public String rankHand(String handType, int[] valueNum, boolean flush, boolean straight, boolean three, boolean full, boolean four, int pair)
+	{
+		if (flush == true)
+		{
+			if (valueNum[0] == 10 && valueNum[1] == 11 && valueNum[2] == 12 && valueNum[3] == 13 && valueNum[4] == 14)
+			{
+				handType = "Royal Flush";
+			}
+			
+			else if (straight == true)
+			{
+				handType = "Straight Flush";
+			}
+			
+			else
+			{
+				handType = "Flush";
+			}
+		}
+		
+		else if (straight == true)
+		{
+			handType = "Straight";
+		}
+		
+		if (valueNum[0] != valueNum[4])
+		{	
+			if (full == true)
+			{
+				handType = "Full House";
+			}
+			
+			else if (four == true)
+			{
+				handType = "Four of a kind";
+			}
+			
+			else if (three == true)
+			{
+				handType = "Three of a kind";
+			}
+			
+			else
+			{
+				if (pair > 1)
+				{
+					handType = "Two pairs";
+				}
+				
+				else if (pair == 1 && !flush)
+				{
+					handType = "One pair";
+				}
+			}
+		}
+		System.out.println();
+		return handType;
+	}
+	
+	public int payWinings(String handType)
+	{
+		int winnings = 0;
+		if (handType.equals("One pair"))
+		{
+			winnings = 1;
+		}
+		
+		else if (handType.equals("Two pairs"))
+		{
+			winnings = 2;
+		}
+		
+		else if (handType.equals("Three of a kind"))
+		{
+			winnings = 3;
+		}
+		
+		else if (handType.equals("Straight"))
+		{
+			winnings = 4;
+		}
+		
+		else if (handType.equals("Flush"))
+		{
+			winnings = 5;
+		}
+		
+		else if (handType.equals("Full House"))
+		{
+			winnings = 6;
+		}
+		
+		else if (handType.equals("Four of a kind"))
+		{
+			winnings = 25;
+		}
+		
+		else if (handType.equals("Straight Flush"))
+		{
+			winnings = 50;
+		}
+		
+		else if (handType.equals("Royal Flush"))
+		{
+			winnings = 250;
+		}
+		
+		return winnings;
+	}
+}
