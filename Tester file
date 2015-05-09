@@ -1,15 +1,34 @@
 //Deck Tester
 
+import java.util.Scanner;
+
 public class DeckTester 
 {
 	public static void main(String[]args)
 	{
 		Deck deck = new Deck();
-		
-		deck.shuffleDeck();
-		deck.dealHand();
-		deck.testHand();
-		deck.determineHand();
-		deck.returnMoney();
+		int tokens=5;
+        System.out.println("Enter 1 token if you want to play :)");
+        Scanner input = new Scanner(System.in);
+        int play = input.nextInt();
+        while(play==1)
+        {
+        	tokens--;
+        	deck.shuffleDeck();
+            deck.dealHand();
+            deck.testHand();
+            deck.determineHand();
+            tokens = deck.returnMoney(tokens);
+            
+            System.out.println("You have " + tokens + " token(s) left.");
+            System.out.println("Do you want to play again?");
+            System.out.println("Enter 1 to play again");
+            play= input.nextInt();
+            System.out.println();
+         }
+         if(play!=1){
+         System.out.println("Thank you for playing");
+         }
 	}
-}
+} 
+    
