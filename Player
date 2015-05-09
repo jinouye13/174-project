@@ -1,0 +1,77 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+public class Player extends Deck
+{
+	private Card[] hand;
+	
+	public Player()
+	{
+		hand = new Card[5];
+	}
+	
+	public Card[] deal()
+	{
+                Card[] numb = new Card[5];
+		for (int i = 0; i < hand.length; i++)
+		{
+                    int index = (int)(Math.random() * deck.length);
+			hand[i] = deck[index];
+                        System.out.println(hand[i]);
+                }
+            Scanner input = new Scanner (System.in);
+            System.out.println("Enter 9 if you want to discard cards");
+            int reply = input.nextInt();
+            if(reply==9){
+            System.out.println("If you want to discard cards, how many do you want to discard");
+            int reply2=input.nextInt();
+            System.out.println("Which ones do you want to discard?");
+            System.out.println("Cards are numbered from 0-4");
+            for(int i=0;i<reply2;i++){
+                int num = input.nextInt();
+                int index = (int)(Math.random() * deck.length);
+                if(num ==0){
+                    hand[0]=deck[index];
+                    System.out.println(hand[0]);
+                }
+                if(num==1){
+                    hand[1]=deck[index];
+                    System.out.println(hand[1]);
+                }
+                if(num==2){
+                    hand[2]=deck[index];
+                    System.out.println(hand[2]);
+                }
+                if(num==3){
+                    hand[3]=deck[index];
+                    System.out.println(hand[3]);
+                }
+                if(num==4){
+                    hand[4]=deck[index];
+                    System.out.println(hand[4]);
+                }
+                
+            }
+            }
+            else{
+               for (int i = 0; i < 5; i++)
+		{
+                    
+                    hand[i]=hand[i];
+                }
+                    }
+		return hand;
+                
+                
+	}
+	public String toString()
+	{
+		String deckString = "";
+		
+        for (int cards = 0; cards < 5; cards++)
+        {
+            deckString = deckString + hand[cards] + "\n";
+        }
+        
+        return deckString;
+	}
+}
