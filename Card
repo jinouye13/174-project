@@ -1,0 +1,50 @@
+//Card class
+
+public class Card  
+ { 
+ 	private String value; 
+ 	private String suit; 
+ 	 
+ 	public Card(int value, String suits) 
+ 	{  		this.suit = suits; 
+ 		 
+ 		if (value == 14) 
+ 		{ 
+ 			this.value = "Ace"; 
+ 		} 
+ 		else if (value == 11) 
+ 		{ 
+ 			this.value = "Jack"; 
+ 		} 
+ 		else if (value == 12) 
+ 		{ 
+ 			this.value = "Queen"; 
+ 		} 
+ 		else if (value == 13) 
+ 		{ 
+ 			this.value = "King"; 
+ 		} 
+ 		else 
+			this.value = "" + value; 
+ 		} 
+ 	 
+ 	 
+ 	public String getSuit() 
+ 	{ 
+ 		return suit; 
+ 	} 
+ 	 
+	public String getValue() 
+ 	{ 
+ 		return value; 
+ 	} 
+ 	 
+ 	public String toString() 
+ 	{ 
+ 		return value + " of " + suit; 
+ 	} 
+ } 
+
+
+
+
