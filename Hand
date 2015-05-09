@@ -4,7 +4,6 @@ import java.util.Arrays;
 public class Hand {
 
 	private Card[] hand = new Card[5];
-	private String handType = "No pair";
 	
 	public void setHand(int number, Card dealtCard)
 	{
@@ -37,7 +36,46 @@ public class Hand {
 		return straight = true;
 	}
 	
-	public int[] convertToInt(int[] valueNum, boolean flush, boolean straight)
+	public boolean checkThree(int[] valueNum, boolean three)
+	{
+		if(valueNum[0] == valueNum[2] || valueNum[1] == valueNum[3] || valueNum[2] == valueNum[4])
+		{
+			return three = true;
+		}
+		return three = false;
+	}
+	
+	public boolean checkFullHouse(int[] valueNum, boolean full)
+	{
+		if((valueNum[0] == valueNum[2] && valueNum[3] == valueNum[4]) || (valueNum[0] == valueNum[1] && valueNum[2] == valueNum[4]))
+		{
+			return full = true;
+		}
+		return full = false;
+	}
+	
+	public boolean checkFour(int[] valueNum, boolean three, boolean four)
+	{
+		if (three && (valueNum[0] == valueNum[3] || valueNum[4] == valueNum[1]))
+		{
+			return four = true;
+		}
+		return four = false;
+	}
+	
+	public int checkPair(int[] valueNum, int pair)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (valueNum[i] == valueNum[i+1])
+			{
+				pair++;
+			}
+		}
+		return pair;
+	}
+	
+	public int[] convertToInt(int[] valueNum)
 	{
 		for (int i = 0; i < 5; i++)
 		{
@@ -95,19 +133,13 @@ public class Hand {
 			}
 			
 		}
+
 		Arrays.sort(valueNum);
-		
-		for (int i = 0; i < 5; i++)
-		{
-			System.out.println(valueNum[i]);
-		}
 		return valueNum;
 	}
 	
-	public String rankHand(int[] valueNum, boolean flush, boolean straight)
+	public String rankHand(String handType, int[] valueNum, boolean flush, boolean straight, boolean three, boolean full, boolean four, int pair)
 	{
-		System.out.println("straight: " + straight);
-		System.out.println("flush: " + flush);
 		if (flush == true)
 		{
 			if (valueNum[0] == 10 && valueNum[1] == 11 && valueNum[2] == 12 && valueNum[3] == 13 && valueNum[4] == 14)
@@ -131,10 +163,41 @@ public class Hand {
 			handType = "Straight";
 		}
 		
+		if (valueNum[0] != valueNum[4])
+		{	
+			if (full == true)
+			{
+				handType = "Full House";
+			}
+			
+			else if (four == true)
+			{
+				handType = "Four of a kind";
+			}
+			
+			else if (three == true)
+			{
+				handType = "Three of a kind";
+			}
+			
+			else
+			{
+				if (pair > 1)
+				{
+					handType = "Two pairs";
+				}
+				
+				else if (pair == 1 && !flush)
+				{
+					handType = "One pair";
+				}
+			}
+		}
+		System.out.println();
 		return handType;
 	}
 	
-	public int payWinings()
+	public int payWinings(String handType)
 	{
 		int winnings = 0;
 		if (handType.equals("One pair"))
