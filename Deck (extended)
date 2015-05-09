@@ -2,10 +2,15 @@
 public class Deck {
 	private Card[] deck;
 	private int numOfCards;
+	private String handType = "No pair";
 	private int currentCard = 0;
 	private Hand playerHand = new Hand();
 	private boolean flush;
 	private boolean straight;
+	private boolean three;
+	private boolean full;
+	private boolean four;
+	private int pair = 0;
 	private int[] valueNum = new int[5];
 	
 	public Deck()
@@ -58,24 +63,32 @@ public class Deck {
 		}
 	}
 	
-	public void getIntHand()
+	public void testHand()
 	{
-		playerHand.convertToInt(valueNum, flush, straight);
-	}
+		playerHand.convertToInt(valueNum);
 	
-	public void flushHand()
-	{
 		flush = playerHand.checkFlush(flush);
-	}
 	
-	public void straightHand()
-	{
 		straight = playerHand.checkStraight(valueNum, straight);
+	
+		three = playerHand.checkThree(valueNum, three);
+	
+		full = playerHand.checkFullHouse(valueNum, full);
+	
+		four = playerHand.checkFour(valueNum, three, four);
+	
+		pair = playerHand.checkPair(valueNum, pair);
 	}
 	
-	public void stuffHand()
+	public void determineHand()
 	{
-		System.out.println(playerHand.rankHand(valueNum, flush, straight));
+		handType = playerHand.rankHand(handType, valueNum, flush, straight, three, full, four, pair);
+		System.out.println(handType);
+	}
+	
+	public void returnMoney()
+	{
+		System.out.println("You won: " + playerHand.payWinings(handType));
 	}
 	
 }
